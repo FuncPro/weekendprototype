@@ -29,7 +29,8 @@ help:
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html'
 	@echo '                                                                       '
 
-html: theme/static/css/marx.min.css
+html:
+	cd theme/static && bower install && compass compile scss/app.scss
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
@@ -38,7 +39,7 @@ clean:
 regenerate:
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
-serve:
+serve: html
 ifdef PORT
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server $(PORT)
 else
@@ -74,6 +75,6 @@ node_modules/marx-css/css/marx.min.css:
 	npm install marx-css
 
 theme/static/css/marx.min.css: node_modules/marx-css/css/marx.min.css
-	mkdir -p theme/static/{css,images} && cp $< $@
+	mkdir -p theme/static/css theme/static/images && cp $< $@
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+##!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
@@ -33,6 +33,16 @@ DEFAULT_PAGINATION = False
 #RELATIVE_URLS = True
 
 THEME = './theme'
+WEBASSETS=True
+
 INDEX_SAVE_AS = 'blog.html'
 
 DISPLAY_PAGES_ON_MENU=False
+
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['assets']
+
+
+ASSET_SOURCE_PATHS = [
+    'theme/static/bower_components/foundation/scss',
+]
